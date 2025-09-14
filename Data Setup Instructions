@@ -1,0 +1,102 @@
+# Data Setup Instructions
+
+## 📊 CORD-19 Dataset
+
+This project uses the CORD-19 dataset, which contains metadata about COVID-19 research papers.
+
+### Dataset Download
+
+1. **Visit Kaggle**: Go to the [CORD-19 dataset page](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
+
+2. **Create Account**: If you don't have a Kaggle account, create one (it's free)
+
+3. **Download Files**: 
+   - Click "Download" button
+   - You only need the `metadata.csv` file for this project
+   - The file is approximately 200-300 MB
+
+4. **Place File**: 
+   - Move `metadata.csv` to the project root directory
+   - The file structure should look like:
+     ```
+     CORD-19-Analysis/
+     ├── metadata.csv        # ← Place the downloaded file here
+     ├── analysis.py
+     ├── streamlit_app.py
+     └── ...
+     ```
+
+### Alternative: Using a Sample
+
+If the full dataset is too large for your system or for testing purposes:
+
+1. **Load the full dataset first**:
+   ```python
+   import pandas as pd
+   df = pd.read_csv('metadata.csv')
+   ```
+
+2. **Create a sample**:
+   ```python
+   # Create a random sample of 10,000 records
+   df_sample = df.sample(n=10000, random_state=42)
+   df_sample.to_csv('metadata_sample.csv', index=False)
+   ```
+
+3. **Update the file path** in the analysis scripts to use `metadata_sample.csv`
+
+### Dataset Information
+
+The `metadata.csv` file contains the following key columns:
+
+- **cord_uid**: Unique identifier
+- **title**: Paper title
+- **abstract**: Paper abstract
+- **authors**: List of authors
+- **journal**: Publication journal
+- **publish_time**: Publication date
+- **url**: Link to paper
+- **doi**: Digital Object Identifier
+
+### File Size Considerations
+
+- **Full dataset**: ~200-300 MB
+- **Memory usage**: ~1-2 GB when loaded into pandas
+- **Recommended sample size**: 10,000-50,000 records for learning purposes
+- **Full analysis**: Use the complete dataset for comprehensive insights
+
+### Troubleshooting
+
+**Issue**: File not found error
+- **Solution**: Ensure `metadata.csv` is in the project root directory
+
+**Issue**: Memory error when loading
+- **Solution**: Use a smaller sample size or increase system RAM
+
+**Issue**: Slow processing
+- **Solution**: Use the sample approach or run analysis in chunks
+
+**Issue**: Download problems
+- **Solution**: Try downloading from different browser or check Kaggle API
+
+### Using Kaggle API (Optional)
+
+For automated download, you can use the Kaggle API:
+
+1. **Install Kaggle API**:
+   ```bash
+   pip install kaggle
+   ```
+
+2. **Setup credentials**: Follow [Kaggle API documentation](https://github.com/Kaggle/kaggle-api)
+
+3. **Download dataset**:
+   ```bash
+   kaggle datasets download -d allen-institute-for-ai/CORD-19-research-challenge
+   ```
+
+4. **Extract metadata.csv** from the downloaded zip file
+
+---
+
+**Note**: This dataset is updated periodically. The analysis results may vary depending on when you download the data.
